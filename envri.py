@@ -1,6 +1,7 @@
 #!/usr/bin/python3 
 import setting
 import sys
+import os 
 import git 
 import socket
 import MDAUrun
@@ -23,5 +24,8 @@ def portcheck(port):
 if __name__ == "__main__":
     while 1:
         if portcheck(9002) == True:
-            rungitpull()
-            importapp()
+            if os.path.exists("_posted") == True :
+                rungitpull()
+                importapp()
+            else:
+                os.makedirs("_posted")
