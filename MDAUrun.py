@@ -25,8 +25,6 @@ def index():
 @app.route('/login/panel')
 def loginp():
     if 'username' in session:
-        print("data1")
-        print(session['username'])
         return redirect(url_for('edit'))
     else:
         return render_template('login.html')
@@ -45,10 +43,15 @@ def login():
                 if fline.replace('\n','') == hashsha.hexdigest():
                     session['username'] = user
                     return redirect(url_for('edit'))
+    else:
+        return "想try我後台？你怎摸不去吃大便"
+
+
 @app.route('/edit')
 def edit():
     if 'username' in session:
         return render_template('redit.html')
+
 
 @app.route('/save' , methods=['GET','POST'])
 def save():
@@ -110,15 +113,16 @@ def markdownr(listmd):
     if request.method == "POST":
         f = open('_posts/' + listmd)
         return f.read()
-
+    else:
+        return "你怎摸不去吃大便"
 
 @app.route('/getmdposted/<listposed>', methods=['GET','POST'])
 def markdownrp(listposed):
     if request.method == "POST":
         f = open('blog/_posts/'+ name)
         return f.read()
-
-
+    else:
+        return "在try我的後台嘛？你怎摸不去吃大便"
 
 @app.route('/jsonlist/<lists>')
 def jsonlist(lists):
