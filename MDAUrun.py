@@ -46,6 +46,10 @@ def login():
     else:
         return "想try我後台？你怎摸不去吃大便"
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 @app.route('/edit')
 def edit():
