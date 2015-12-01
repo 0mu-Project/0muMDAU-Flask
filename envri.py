@@ -25,6 +25,7 @@ if __name__ == "__main__":
     while 1:
         if portcheck(9002) == True:
             if os.path.exists("_posted") == True :
+                rungitpull()
                 importapp()
             else:
                 os.makedirs("_posted")
