@@ -1,6 +1,7 @@
 from flask import Flask, request , session, redirect, url_for, escape , Response
-from flask import render_template
+from flask import render_template 
 import git 
+import sqlite3
 import os
 import setting
 import hashlib
@@ -35,16 +36,27 @@ def login():
         user = request.form['buser']
         passd = request.form['bpass']
         print(user)
-        pathuser  = "../pskey/" + user
+        try:
+            print("debug")
+            with sqlite3.connect('../sqlite/0MuMDAU.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute('select password from user where username=?',[user])
+                password = cursor.fetchone() 
+        except:
+            print("erruser")
+            return "帳號錯誤！"
+        pathuser  = password[0]
+        print(pathuser)
         hashsha =  hashlib.sha256(passd.replace('\n','').encode())
-        if os.path.exists(pathuser) == True :
-            with open(pathuser , 'r') as f :
-                fline = f.readline()
-                if fline.replace('\n','') == hashsha.hexdigest():
-                    session['username'] = user
-                    return redirect(url_for('edit'))
+        if pathuser == hashsha.hexdigest():
+            session['username'] = user
+            return redirect(url_for('edit'))
+        else:
+            print("err pass")
+            return "密碼錯誤"
     else:
         return "想try我後台？你怎摸不去吃大便"
+
 
 @app.route('/logout')
 def logout():
@@ -52,9 +64,9 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/edit')
-def edit():
+def edit(username=None):
     if 'username' in session:
-        return render_template('redit.html')
+        return render_template('redit.html', username = session['username'])
 
 
 @app.route('/save' , methods=['GET','POST'])
@@ -69,7 +81,7 @@ def save():
         if not fil.strip():
             return "打標題啦,e04!"
         else:
-            f = open('_posts/'+ filen  +'.markdown', 'wb') 
+            f = open('_posts/'+ filen  +'.markdown', 'wb+') 
             f.write(argment.encode('UTF-8'))
             f.close()
             ans = "file open"
@@ -94,7 +106,7 @@ def submit():
                 with open( pathuser ,'r' ) as f:
                     fline = f.readline()
                     if fline.replace('\n' , '')  == hashsha.hexdigest() :
-                        f = open('_posted/'+ filen  +'.markdown', 'wb') 
+                        f = open('_posted/'+ filen  +'.markdown', 'wb+') 
                         f.write(argment.encode('UTF-8'))
                         f.close()
                         ans = "file open"
