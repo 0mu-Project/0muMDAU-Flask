@@ -30,6 +30,23 @@ def loginp():
     else:
         return render_template('login.html')
 
+@app.route('/panel/useradd' , methods=['GET','POST'])
+def add():
+    if request.method == "POST":
+        username = request.form['useradd']
+        dpass = request.form['passdd']
+        try:
+            print("adduser debug")
+            with sqlite3.connect('../sqlite/0MuMDAU.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute('##改成資料庫查詢語法 查詢使用者是否存在', [username])
+                #告訴我結果是存在（？）或是不存在（？）
+        except:
+            print("dd")
+
+
+
+
 @app.route('/login' , methods=['GET','POST'])
 def login():
     if request.method == "POST":
