@@ -1,33 +1,30 @@
 {% extends "base.html" %}
 {% block title %}Login Panel{% endblock%}
 {% block content %}
-				  <div class="panel panel-default" style=" border-radius: 0 !important;" id="logging">
-					  <div class="panel-heading">0Mu Markdown Blog Editor</div>
-					  <div class="panel-body"> 
-						  <img style="display:block; margin:auto;" src="/static/img/bg.jpg"></img>
-						  <form id="bck" class="createtable" method="post" action="/login">
-							  </br>
-							  <div class="input-group">
-								  <span class="input-group-addon" id="basic-addon3">後台帳號（預設是github使用者名稱）</span>
-									<input class="form-control" type="text" name="buser" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
-								</div></br>
-								<div class="input-group">
-									  <span class="input-group-addon" id="basic-addon3">後台密碼（預設是github密碼）</span>
-									  <input class="form-control" type="password" name="bpass" size="20" placeholder="請輸入您Github的密碼"><br>
-								  </div>
-								  <br />
-							<div class="btn-group pull-right" role="group" aria-label="login Option">
-								<button type="submit" id="login" class="btn btn-success">
-									<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-									登入系統</button>
-								</div>
-						  </form>
-								  </br>
-								  </hr>
-						</div>
-					</div>
-				</div>
+<div class="panel panel-default" style=" border-radius: 0 !important;" id="logging">
+	<div class="panel-heading">0Mu Markdown Blog Editor</div>
+	<div class="panel-body"> 
+		<img style="display:block; margin:auto;" src="/static/img/bg.jpg"></img>
+		<form id="bck" class="createtable" method="post" action="/login">
+			</br>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon3">後台帳號（預設是github使用者名稱）</span>
+				<input class="form-control" type="text" name="buser" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
+			</div></br>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon3">後台密碼（預設是github密碼）</span>
+				<input class="form-control" type="password" name="bpass" size="20" placeholder="請輸入您Github的密碼"><br>
 			</div>
-		   	<div class="col-xs-1 col-sm-1"></div>
-		</div>
+			<br />
+			<div class="btn-group pull-right" role="group" aria-label="login Option">
+				<button type="submit" id="login" class="btn btn-success">
+					<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
+					登入系統
+				</button>
+			</div>			
+		</form>		
+		</br>
+		</hr>
+	</div>
+</div>
 {% endblock%}
