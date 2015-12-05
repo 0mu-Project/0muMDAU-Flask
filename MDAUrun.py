@@ -39,8 +39,12 @@ def add():
             print("adduser debug")
             with sqlite3.connect('../sqlite/0MuMDAU.db') as conn:
                 cursor = conn.cursor()
-                cursor.execute('##改成資料庫查詢語法 查詢使用者是否存在', [username])
-                #告訴我結果是存在（？）或是不存在（？）
+                cursor.execute('select COUNT() as "Resault" from user where username = ?', [username])
+                answer = cursor.fetchone
+                if answer == 1 :
+                    return "去吃大便"
+                else:
+                    return "Create!"
         except:
             print("dd")
 
