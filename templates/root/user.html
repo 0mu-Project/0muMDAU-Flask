@@ -1,0 +1,35 @@
+{% extends "base.html"%}
+{% block title %}Admin Panel{% endblock %}
+{% block top %}{% include "topbar.html" %}{% endblock %}
+{% block content %}
+<br />
+<br />
+<div class="panel panel-default" style="border-radius:0 !important; border:1;">
+	<div class="panel-body">
+		<div class="col-md-3" style="border-right: 1px solid #ccc;">
+				<h1 class="text-right"> Reimu</h4>
+				<h4 class="text-right"> System Developer</h4>
+				<br />
+				<a style="text-align: right; float: right;" href="#">更換個人密碼</a>
+		</div>
+		<div class="col-md-9">
+			<ul class="nav nav-tabs">
+				  <li class="active"><a data-toggle="tab" href="#users">用戶管理</a></li>
+				  <li><a data-toggle="tab" href="#sysconfig">系統設定</a></li>
+				  <li><a data-toggle="tab" href="#sysmaintan">系統維護</a></li>
+			  </ul>
+			  <div class="tab-content">
+				  <div id="users" class="tab-pane fade in active">
+				  </div>
+				  <div id="sysconfig" class="tab-pane fade">
+				  </div>
+				  <div id="sysmaintan" class="tab-pane fade">
+				  </div>
+		 	  </div>
+		</div>
+
+	
+	</div>
+</div>
+{% endblock %}
+

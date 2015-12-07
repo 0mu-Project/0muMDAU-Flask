@@ -1,6 +1,5 @@
 from flask import Flask, request , session, redirect, url_for, escape , Response
 from flask import render_template 
-import git 
 import sqlite3
 import os
 import setting
@@ -13,12 +12,11 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         blogpath = "./blog"
-        if os.path.exists(blogpath) == True: 
-            g = git.cmd.Git()
-            g.pull()
+        if os.path.exists(blogpath) == True:
+            subprocess.call(['git pull'], shell=True)
             return 'OK'
         else:
-            git.Git().clone(setting.gitpath)
+            subprocess.call(['git clone ' + setting.gitpath], shell=True)
             return 'OK'
     else:
         return render_template('gitload.html')
@@ -30,7 +28,7 @@ def loginp():
     else:
         return render_template('login.html')
 
-@app.route('/panel/useradd' , methods=['GET','POST'])
+@app.route('/root/userpanel' , methods=['GET','POST'])
 def add():
     if request.method == "POST":
         username = request.form['useradd']
@@ -47,8 +45,9 @@ def add():
                     return "Create!"
         except:
             print("dd")
-
-
+    else:
+        return render_template('root/user.html')
+        
 
 
 @app.route('/login' , methods=['GET','POST'])
@@ -133,11 +132,8 @@ def submit():
                         ans = "file open"
                         import shutil
                         shutil.copyfile('_posted/' + filen +'.markdown','blog/_posts/' + filen +'.markdown')
-                        repo = git.Repo("./blog")
-                        index = repo.index
-                        index.add(["_posts"])
                         message = 'add new posts' + filen
-                        index.commit(message)
+                        subprocess.call(['cd blog | git add . | git commit -m' + message], shell=True)
                         subprocess.call(['bash ./script/autoAuth.sh ' + user + ' ' + passd + ' ./blog'], shell=True)
                         return "文章已經存在本地的_posted,文章即將發布.." 
                     else:
@@ -156,7 +152,7 @@ def markdownr(listmd):
 @app.route('/getmdposted/<listposed>', methods=['GET','POST'])
 def markdownrp(listposed):
     if request.method == "POST":
-        f = open('blog/_posts/'+ name)
+        f = open('blog/_posts/'+ listposed)
         return f.read()
     else:
         return "在try我的後台嘛？你怎摸不去吃大便"

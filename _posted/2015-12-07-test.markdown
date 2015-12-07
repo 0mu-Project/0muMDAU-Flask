@@ -1,7 +1,7 @@
-l---
+---
 layout: post
 title:  "" 
-date: post
+date: 
 categories: jekyll update 
 ---
 <!--
@@ -12,4 +12,4 @@ date:   20xx-xx-xx xx:xx:xx +0800
 categories: jekyll update
 -->
 <!-- 內文  -->
-								
+			
