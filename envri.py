@@ -2,13 +2,12 @@
 import setting
 import sys
 import os 
-import git 
 import socket
 import MDAUrun
+import subprocess
 
 def rungitpull():
-    g = git.cmd.Git("./")
-    g.pull()
+    subprocess.call(['git pull'], shell=True)
 
 def importapp():
     MDAUrun.app.run(host='127.0.0.1', port=setting.port)

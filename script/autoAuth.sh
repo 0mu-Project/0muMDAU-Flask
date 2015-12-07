@@ -64,6 +64,8 @@ fi
 git config $gitRemote `addAuthInfo $URL $1 $2`
 
 ## 推檔案上去
+git add .
+git commit -m "$4"
 git push
 
 ## 移除認證資訊

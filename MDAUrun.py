@@ -13,7 +13,7 @@ def index():
     if request.method == 'POST':
         blogpath = "./blog"
         if os.path.exists(blogpath) == True:
-            subprocess.call(['git pull'], shell=True)
+            subprocess.call(['git pull'], shell=True , cwd='./blog')
             return 'OK'
         else:
             subprocess.call(['git clone ' + setting.gitpath], shell=True)
@@ -132,9 +132,8 @@ def submit():
                         ans = "file open"
                         import shutil
                         shutil.copyfile('_posted/' + filen +'.markdown','blog/_posts/' + filen +'.markdown')
-                        message = 'add new posts' + filen
-                        subprocess.call(['cd blog | git add . | git commit -m' + message], shell=True)
-                        subprocess.call(['bash ./script/autoAuth.sh ' + user + ' ' + passd + ' ./blog'], shell=True)
+                        message = 'add_new_posts_' + filen
+                        subprocess.call(['bash ./script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message ], shell=True)
                         return "文章已經存在本地的_posted,文章即將發布.." 
                     else:
                         return "密碼錯誤是要登入三小"
