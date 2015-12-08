@@ -46,7 +46,10 @@ def add():
         except:
             print("dd")
     else:
-        return render_template('root/user.html', username = session['username'])
+        if 'username' in session:
+            return render_template('root/user.html', username = session['username'])
+        else:
+            return "EAT SHIT!"
         
 
 
@@ -190,8 +193,11 @@ def shutdown_server():
 
 @app.route('/update')
 def update():
-    shutdown_server()
-    return "server updateing"
+    if 'username' in session:
+        shutdown_server()
+        return "server updateing"
+    else:
+        return "eat shit"
 
 
 app.secret_key = 'aoksp=f^=qrt%%%___jrfw'
