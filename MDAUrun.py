@@ -24,12 +24,12 @@ def index():
 @app.route('/login/panel')
 def loginp():
     if 'username' in session:
-        return redirect(url_for('edit'))
+        return redirect(url_for('panel'))
     else:
         return render_template('login.html')
 
-@app.route('/root/panel' , methods=['GET','POST'])
-def add():
+@app.route('/panel' , methods=['GET','POST'])
+def panel():
     if request.method == "POST":
         username = request.form['useradd']
         dpass = request.form['passdd']
@@ -47,11 +47,10 @@ def add():
             print("dd")
     else:
         if 'username' in session:
+            print("test")
             return render_template('root/user.html', username = session['username'])
         else:
             return "EAT SHIT!"
-        
-
 
 @app.route('/login' , methods=['GET','POST'])
 def login():
@@ -73,7 +72,7 @@ def login():
         hashsha =  hashlib.sha256(passd.replace('\n','').encode())
         if pathuser == hashsha.hexdigest():
             session['username'] = user
-            return redirect(url_for('edit'))
+            return redirect(url_for('panel'))
         else:
             print("err pass")
             return "密碼錯誤"
@@ -202,4 +201,4 @@ def update():
 
 app.secret_key = 'aoksp=f^=qrt%%%___jrfw'
 if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1', port=setting.port)

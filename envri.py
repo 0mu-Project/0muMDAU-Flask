@@ -9,8 +9,7 @@ def rungitpull():
     subprocess.call(['git pull'], shell=True)
 
 def importapp():
-    import MDAUrun
-    MDAUrun.app.run(host='127.0.0.1', port=setting.port)
+    subprocess.call(['pypy3 MDAUrun.py'], shell=True)
 
 def portcheck(port):
     s = socket.socket()

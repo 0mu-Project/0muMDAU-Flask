@@ -1,0 +1,155 @@
+		<br /> 
+<div class="panel panel-default" style=" border-radius: 0 !important;    border: 0;" id="load">
+   	</br>
+	<img style="display:block; margin:auto;" src="static/img/edit.jpg" width="97.5%" height"50%"></img>
+	<div class="panel-body">
+		<form id="form" class="createtable">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon3">Github 帳號</span>
+				<input class="form-control" type="text" name="username" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
+			</div></br>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon3">Github 密碼</span>
+				<input class="form-control" type="password" name="password" size="20" placeholder="請輸入您Github的密碼"><br>
+			</div></br>
+			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="格式 不可中文 不可空白" id = "fc-inp"></br>
+			<textarea class="content" name="content" data-provide="markdown" rows="20">---
+layout: post
+title:  "" 
+date: 
+categories: jekyll update 
+---
+<!--
+請依照以下格式填寫上面的發文標注
+layout: post
+title:  "你要的標題"
+date:   20xx-xx-xx xx:xx:xx +0800
+categories: jekyll update
+-->
+<!-- 內文  -->
+			</textarea> 
+			<hr/>
+		</form>
+		<div class="btn-group pull-right" role="group" aria-label="Submit Option">
+			<button type="submit" id="save" class="btn btn-success">
+				<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
+				只儲存在本地</button>
+			<button type="submit" id="submit" class="btn btn-warning">
+				<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+				直接發表此文
+			</button>
+		</div>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#posts">尚未發布</a></li>
+			<li><a data-toggle="tab" href="#posted">已經發布</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="posts" class="tab-pane fade in active">	
+				<table id="marktitle" class="table">
+					<tr>
+						<th>佇列</th>
+						<th>檔案名稱</th>	
+					</tr>
+				</table>
+			</div>
+			<div id="posted" class="tab-pane fade">	
+				<table id="markedtitle" class="table">
+					<tr>
+						<th>佇列</th>
+						<th>檔案名稱</th>	
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>	
+	function showmdposted(url) {
+		$.ajax({
+			type : "POST",
+			url : "/getmdposted/" + url ,
+			dataType: "text",
+			success: function(data) {
+				var title = url.split(".",1);
+				var titles = title.toString();
+				var titled = titles.substr(11);
+				$("textarea.content").data('markdown').setContent(data);
+				$("#fc-inp").val(titled);
+			}
+		});
+	}
+</script>
+<script>
+	function showmd(url) {
+		$.ajax({
+			type : "POST",
+			url : "/getmd/" + url ,
+			dataType: "text",
+			success: function(data) {
+				var title = url.split(".",1);
+				var titles = title.toString();
+				var titled = titles.substr(11);
+				$("textarea.content").data('markdown').setContent(data);
+				$("#fc-inp").val(titled);
+			}
+		});
+	}
+</script>
+<script>
+	$(document).ready(function(){
+		$.getJSON("/jsonlist/posts" , function ( data ) {
+			console.log( data );
+			var number =1;
+			$.each(data, function (index, value){
+				console.log(value);
+				var val = "'" + value + "'";
+				var myRow = '<tr><td>'+number + '</td><td><a href="javascript:showmd('+ val + ')"> '+ value +'</a></td></tr>';
+			 	number = number +1;
+				$("#marktitle tr:last").after(myRow); 
+			})
+	  	});
+		$.getJSON("/jsonlist/posted" , function ( data ) {
+			console.log( data );
+			var number =1;
+			$.each(data, function (index, value){
+				console.log(value);
+			   	var	val = "'" + value + "'";
+				var myRow = '<tr><td>'+number + '</td><td><a href="javascript:showmdposted('+ val + ')"> '+ value +'</a></td></tr>';
+				number = number +1;
+			  	$("#markedtitle tr:last").after(myRow); 
+		  	})
+  		});	
+	});
+</script>	  
+<script>
+	$(function() {
+		$("button#save").click(function(){
+				$.ajax({
+		 			type: "POST",
+		 			url: "/save",
+					data: $('#form').serialize(),
+					datatype: "text",
+					success: function( data ){ 
+						alert(data);},
+					error: function(){ alert("503 error");} 
+			});
+			
+		});
+	});
+</script>
+<script>
+	$(function() {
+		$("button#submit").click(function(){
+		   	$.ajax({
+		 		type: "POST",
+				url: "/submit",
+				datatype: "text",
+		 		data: $('#form').serialize(),
+				success: function(data){ 
+					alert(data);},
+				error: function(){ alert("503 error");} 
+			});
+		});
+	});
+</script>
+
