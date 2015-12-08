@@ -28,7 +28,7 @@ def loginp():
     else:
         return render_template('login.html')
 
-@app.route('/root/userpanel' , methods=['GET','POST'])
+@app.route('/root/panel' , methods=['GET','POST'])
 def add():
     if request.method == "POST":
         username = request.form['useradd']
@@ -46,7 +46,7 @@ def add():
         except:
             print("dd")
     else:
-        return render_template('root/user.html')
+        return render_template('root/user.html', username = session['username'])
         
 
 
