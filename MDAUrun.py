@@ -48,7 +48,7 @@ def panel():
     else:
         if 'username' in session:
             print("test")
-            return render_template('root/user.html', username = session['username'])
+            return render_template('panel.html', username = session['username'])
         else:
             return "EAT SHIT!"
 
