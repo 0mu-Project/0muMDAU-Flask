@@ -204,4 +204,4 @@ from werkzeug.contrib.fixers import ProxyFix
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='127.0.0.1', port=setting.port)
