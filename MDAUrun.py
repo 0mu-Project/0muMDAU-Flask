@@ -200,5 +200,8 @@ def update():
 
 
 app.secret_key = 'aoksp=f^=qrt%%%___jrfw'
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=setting.port)
+from werkzeug.contrib.fixers import ProxyFix 
+app.wsgi_app = ProxyFix(app.wsgi_app)
+
+if __name__ == "__main__":
+    app.run()
