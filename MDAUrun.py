@@ -5,7 +5,7 @@ import os
 import setting
 import hashlib
 import subprocess
-
+import logging
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -34,7 +34,6 @@ def panel():
         username = request.form['useradd']
         dpass = request.form['passdd']
         try:
-            print("adduser debug")
             with sqlite3.connect('../sqlite/0MuMDAU.db') as conn:
                 cursor = conn.cursor()
                 cursor.execute('select COUNT() as "Resault" from user where username = ?', [username])
@@ -47,7 +46,6 @@ def panel():
             print("dd")
     else:
         if 'username' in session:
-            print("test")
             return render_template('panel.html', username = session['username'])
         else:
             return "EAT SHIT!"
@@ -57,28 +55,22 @@ def login():
     if request.method == "POST":
         user = request.form['buser']
         passd = request.form['bpass']
-        print(user)
         try:
-            print("debug")
             with sqlite3.connect('../sqlite/0MuMDAU.db') as conn:
                 cursor = conn.cursor()
                 cursor.execute('select password from user where username=?',[user])
                 password = cursor.fetchone() 
         except:
-            print("erruser")
             return "帳號錯誤！"
         pathuser  = password[0]
-        print(pathuser)
         hashsha =  hashlib.sha256(passd.replace('\n','').encode())
         if pathuser == hashsha.hexdigest():
             session['username'] = user
             return redirect(url_for('panel'))
         else:
-            print("err pass")
             return "密碼錯誤"
     else:
         return "想try我後台？你怎摸不去吃大便"
-
 
 @app.route('/logout')
 def logout():
@@ -89,7 +81,6 @@ def logout():
 def edit(username=None):
     if 'username' in session:
         return render_template('redit.html', username = session['username'])
-
 
 @app.route('/save' , methods=['GET','POST'])
 def save():
@@ -170,14 +161,17 @@ def jsonlist(lists):
             directory = os.path.expanduser(postpath)
             data = []
             i = 0
-            for f in os.listdir(directory):
-                if os.path.isfile(os.path.join(directory, f)):
-                    i = i + 1
-                    data.insert(i,f)
-                import json
-                jsondump = json.dumps(data,separators=( ',' , ':'))
-            resp = Response(response=jsondump,status=200, mimetype="application/json")
-            return(resp)
+            if os.listdir(directory) ==None:
+                return("[""]")
+            else:
+                for f in os.listdir(directory):
+                    if os.path.isfile(os.path.join(directory, f)):
+                        i = i + 1
+                        data.insert(i,f)
+                    import json
+                    jsondump = json.dumps(data,separators=( ',' , ':'))
+                    resp = Response(response=jsondump,status=200, mimetype="application/json")
+                    return(resp)
         else:
             os.makedirs(postpath)
         return 'OK'
@@ -204,4 +198,7 @@ from werkzeug.contrib.fixers import ProxyFix
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=setting.port)
+    logging.basicConfig(filename='../server.log',level=logging.DEBUG)
+    print("0MuMDAU Server Run on 127.0.0.1:" + str(setting.port))
+    app.run(host="127.0.0.1",port=setting.port)
+
