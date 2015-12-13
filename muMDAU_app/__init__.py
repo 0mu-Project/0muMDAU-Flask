@@ -31,18 +31,29 @@ def panel():
         else:
             return "EAT SHIT!"
 
-def shutdown_server():
+def restart_server():
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
 
+
 @app.route('/update')
 def update():
     if 'username' in session:
-        shutdown_server()
+        restart_server()
         return "server updateing"
     else:
         return "eat shit"
 
-
+@app.route('/shutdown')
+def shutdown_server():
+    if muMDAU_app.setting.debug == 1 :
+        if 'username' in session:
+            pkill_server()
+            return "server go to shutdown"
+        else:
+            return "eat shit"
+    else:
+        return "eat shit"
+        
