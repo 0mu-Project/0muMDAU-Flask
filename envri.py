@@ -1,5 +1,5 @@
 #!/usr/bin/pypy3 
-import setting
+import muMDAU_app.setting
 import sys
 import os 
 import socket
@@ -9,7 +9,7 @@ def rungitpull():
     subprocess.call(['git pull'], shell=True)
 
 def importapp():
-    subprocess.call(['pypy3 MDAUrun.py'], shell=True)
+    subprocess.call(['pypy3 MDAUServer.py'], shell=True)
 
 def portcheck(port):
     s = socket.socket()
