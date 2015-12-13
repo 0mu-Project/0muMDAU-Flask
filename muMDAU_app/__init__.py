@@ -3,7 +3,8 @@ from flask import render_template
 import sqlite3
 app = Flask(__name__)
 
-import muMDAU_app.setting 
+import subprocess
+import setting 
 import muMDAU_app.index 
 import muMDAU_app.login 
 import muMDAU_app.logout 
@@ -37,6 +38,8 @@ def restart_server():
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
 
+def pkill_server():
+    subprocess.call(["pkill pypy3"],shell=True)
 
 @app.route('/update')
 def update():

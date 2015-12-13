@@ -1,5 +1,5 @@
-from muMDAU_app import app , setting
-import logging
+from muMDAU_app import app 
+import logging,setting
 
 app.secret_key = 'aoksp=f^=qrt%%%___jrfw'
 from werkzeug.contrib.fixers import ProxyFix 

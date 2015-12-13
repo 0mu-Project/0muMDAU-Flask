@@ -1,5 +1,5 @@
 #!/usr/bin/pypy3 
-import muMDAU_app.setting
+import setting
 import sys
 import os 
 import socket
@@ -21,7 +21,7 @@ def portcheck(port):
 
 if __name__ == "__main__":
     while 1:
-        if portcheck(muMDAU_app.setting.port) == True:
+        if portcheck(setting.port) == True:
             if os.path.exists("_posted") == True :
                 rungitpull()
                 importapp()
