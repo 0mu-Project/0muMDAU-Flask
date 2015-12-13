@@ -21,7 +21,7 @@ def portcheck(port):
 
 if __name__ == "__main__":
     while 1:
-        if portcheck(9002) == True:
+        if portcheck(muMDAU_app.setting.port) == True:
             if os.path.exists("_posted") == True :
                 rungitpull()
                 importapp()
