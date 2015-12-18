@@ -37,7 +37,7 @@
 	function showmdposted(url) {
 		$.ajax({
 			type : "POST",
-			url : "/md/list/" + url ,
+			url : "/md/listed/" + url ,
 			dataType: "text",
 			success: function(data) {
 				var title = url.split(".",1);
@@ -53,7 +53,7 @@
 	function showmd(url) {
 		$.ajax({
 			type : "POST",
-			url : "/md/listed/" + url ,
+			url : "/md/list/" + url ,
 			dataType: "text",
 			success: function(data) {
 				var title = url.split(".",1);
