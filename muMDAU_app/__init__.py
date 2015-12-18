@@ -35,5 +35,5 @@ def shutdown_server():
         else:
             return "eat shit"
     else:
-        return "eat shit"
+        return "debug 模式沒有開啟，請使用重新啟動"
         
