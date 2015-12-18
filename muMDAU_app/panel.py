@@ -1,6 +1,7 @@
 from muMDAU_app import app
 from flask import request , session , render_template  
 import sqlite3 
+import setting
 @app.route('/panel' , methods=['GET','POST'])
 def panel():
     if request.method == "POST":
@@ -19,6 +20,7 @@ def panel():
             print("dd")
     else:
         if 'username' in session:
-            return render_template('panel.html', username = session['username'])
+            f = open(setting.s_log)
+            return render_template('panel.html', username = session['username'] , log = f.read())
         else:
             return "EAT SHIT!"
