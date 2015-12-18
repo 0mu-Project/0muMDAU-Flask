@@ -37,7 +37,7 @@
 	function showmdposted(url) {
 		$.ajax({
 			type : "POST",
-			url : "/getmdposted/" + url ,
+			url : "/md/list/" + url ,
 			dataType: "text",
 			success: function(data) {
 				var title = url.split(".",1);
@@ -53,7 +53,7 @@
 	function showmd(url) {
 		$.ajax({
 			type : "POST",
-			url : "/getmd/" + url ,
+			url : "/md/listed/" + url ,
 			dataType: "text",
 			success: function(data) {
 				var title = url.split(".",1);
@@ -67,7 +67,7 @@
 </script>
 <script>
 	$(document).ready(function(){
-		$.getJSON("/jsonlist/posts" , function ( data ) {
+		$.getJSON("/edit/posts" , function ( data ) {
 			console.log( data );
 			var number =1;
 			$.each(data, function (index, value){
@@ -78,7 +78,7 @@
 				$("#marktitle tr:last").after(myRow); 
 			})
 	  	});
-		$.getJSON("/jsonlist/posted" , function ( data ) {
+		$.getJSON("/edit/posted" , function ( data ) {
 			console.log( data );
 			var number =1;
 			$.each(data, function (index, value){
@@ -96,7 +96,7 @@
 		$("button#save").click(function(){
 				$.ajax({
 		 			type: "POST",
-		 			url: "/save",
+		 			url: "/md/save",
 					data: $('#form').serialize(),
 					datatype: "text",
 					success: function( data ){ 
@@ -112,7 +112,7 @@
 		$("button#submit").click(function(){
 		   	$.ajax({
 		 		type: "POST",
-				url: "/submit",
+				url: "/md/submit",
 				datatype: "text",
 		 		data: $('#form').serialize(),
 				success: function(data){ 

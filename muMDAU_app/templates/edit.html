@@ -67,7 +67,7 @@ categories: jekyll update
 	function showmdposted(url) {
 		$.ajax({
 			type : "POST",
-			url : "/getmdposted/" + url ,
+			url : "/md/listed/" + url ,
 			dataType: "text",
 			success: function(data) {
 				var title = url.split(".",1);
@@ -83,7 +83,7 @@ categories: jekyll update
 	function showmd(url) {
 		$.ajax({
 			type : "POST",
-			url : "/getmd/" + url ,
+			url : "/md/list/" + url ,
 			dataType: "text",
 			success: function(data) {
 				var title = url.split(".",1);
@@ -97,7 +97,7 @@ categories: jekyll update
 </script>
 <script>
 	$(document).ready(function(){
-		$.getJSON("/jsonlist/posts" , function ( data ) {
+		$.getJSON("/edit/posts" , function ( data ) {
 			console.log( data );
 			var number =1;
 			$.each(data, function (index, value){
@@ -108,7 +108,7 @@ categories: jekyll update
 				$("#marktitle tr:last").after(myRow); 
 			})
 	  	});
-		$.getJSON("/jsonlist/posted" , function ( data ) {
+		$.getJSON("/edit/posted" , function ( data ) {
 			console.log( data );
 			var number =1;
 			$.each(data, function (index, value){
@@ -126,7 +126,7 @@ categories: jekyll update
 		$("button#save").click(function(){
 				$.ajax({
 		 			type: "POST",
-		 			url: "/save",
+		 			url: "/md/save",
 					data: $('#form').serialize(),
 					datatype: "text",
 					success: function( data ){ 
@@ -142,7 +142,7 @@ categories: jekyll update
 		$("button#submit").click(function(){
 		   	$.ajax({
 		 		type: "POST",
-				url: "/submit",
+				url: "/md/submit",
 				datatype: "text",
 		 		data: $('#form').serialize(),
 				success: function(data){ 

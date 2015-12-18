@@ -1,8 +1,10 @@
 from muMDAU_app import app , setting
-from flask import request , render_template
+from flask import request , render_template , Blueprint
 import subprocess , os
 
-@app.route('/', methods=['GET', 'POST'])
+main = Blueprint('main',__name__)
+
+@main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         blogpath = "./blog"

@@ -1,13 +1,14 @@
-from muMDAU_app import app
-from flask import request , session , Response , render_template
+from flask import request , session , Response , render_template , Blueprint
 import os , hashlib , subprocess
 
-@app.route('/edit')
+peditor = Blueprint('peditor',__name__)
+markdown = Blueprint('markdown',__name__)
+@peditor.route('/')
 def edit(username=None):
     if 'username' in session:
         return render_template('redit.html', username = session['username'])
 
-@app.route('/save' , methods=['GET','POST'])
+@markdown.route('/save' , methods=['GET','POST'])
 def save():
     if request.method == "POST":
         argment = request.form['content']
@@ -25,7 +26,7 @@ def save():
             ans = "file open"
             return "文章已經存在本地的_posts,重新整理即可在佇列中看到"
 
-@app.route('/submit' , methods=['GET','POST'])
+@markdown.route('/submit' , methods=['GET','POST'])
 def submit():
     if request.method == "POST":
         argment = request.form['content']
@@ -51,14 +52,14 @@ def submit():
                         import shutil
                         shutil.copyfile('_posted/' + filen +'.markdown','./blog/_posts/' + filen +'.markdown')
                         message = 'add_new_posts_' + filen
-                        subprocess.call(['bash ./script/autoAuth.sh ' + user + ' ' + passd + ' ../blog ' + message ], shell=True)
+                        subprocess.call(['bash script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message ], shell=True)
                         return "文章已經存在本地的_posted,文章即將發布.." 
                     else:
                         return "密碼錯誤是要登入三小"
             else:
                 return "帳號錯誤是要登入三小"
         
-@app.route('/getmd/<listmd>', methods=['GET','POST'])
+@markdown.route('/list/<listmd>', methods=['GET','POST'])
 def markdownr(listmd):
     if request.method == "POST":
         f = open('./_posts/' + listmd)
@@ -66,7 +67,7 @@ def markdownr(listmd):
     else:
         return "你怎摸不去吃大便"
 
-@app.route('/getmdposted/<listposed>', methods=['GET','POST'])
+@markdown.route('/listed/<listposed>', methods=['GET','POST'])
 def markdownrp(listposed):
     if request.method == "POST":
         f = open('./blog/_posts/'+ listposed)
@@ -74,7 +75,7 @@ def markdownrp(listposed):
     else:
         return "在try我的後台嘛？你怎摸不去吃大便"
 
-@app.route('/jsonlist/<lists>')
+@peditor.route('/<lists>')
 def jsonlist(lists):
     if 'username' in session:
         if lists == "posts" :
