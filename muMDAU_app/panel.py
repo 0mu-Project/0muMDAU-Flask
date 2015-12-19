@@ -20,7 +20,13 @@ def panel():
             print("dd")
     else:
         if 'username' in session:
-            f = open(setting.s_log)
-            return render_template('panel.html', username = session['username'] , log = f.read())
+            return render_template('panel.html', username = session['username'])
         else:
             return "EAT SHIT!"
+
+@app.route('/panel/server', methods=['GET','POST'])
+def maintance():
+    if request.method == "GET" :
+        if 'username' in session:
+            f = open(setting.s_log)
+            return render_template('log.html',log = f.read())
