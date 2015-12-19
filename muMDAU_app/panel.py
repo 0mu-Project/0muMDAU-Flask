@@ -22,7 +22,7 @@ def panel():
         if 'username' in session:
             return render_template('panel.html', username = session['username'])
         else:
-            return "EAT SHIT!"
+            return render_template('login.html')
 
 @app.route('/panel/server', methods=['GET','POST'])
 def maintance():
@@ -30,3 +30,5 @@ def maintance():
         if 'username' in session:
             f = open(setting.s_log)
             return render_template('log.html',log = f.read())
+        else: 
+            return render_template('login.html')
