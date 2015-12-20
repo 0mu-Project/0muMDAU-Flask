@@ -14,5 +14,5 @@ app.register_blueprint(main)
 if __name__ == "__main__":
     logging.basicConfig(filename=setting.s_log,level=logging.DEBUG)
     print("0MuMDAU Server Run on 127.0.0.1:" + str(setting.port))
-    app.run(host="127.0.0.1",port=setting.port)
+    app.run(host="127.0.0.1",port=setting.port , debug=True)
 

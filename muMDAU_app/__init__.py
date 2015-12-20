@@ -1,4 +1,4 @@
-from flask import Flask, request , session
+from flask import Flask, request , session , redirect , url_for
 from flask import render_template 
 import sqlite3
 app = Flask(__name__)
@@ -14,15 +14,25 @@ def restart_server():
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
-
+def gitpull():
+    subprocess.call(["git pull"],shell=True)
 def pkill_server():
     subprocess.call(["pkill pypy3"],shell=True)
 
 @app.route('/update')
 def update():
     if 'username' in session:
+        gitpull()
         restart_server()
-        return "server updateing"
+        return redirect(url_for('main.index'))
+    else:
+        return "eat shit"
+
+@app.route('/restart')
+def restart():
+    if 'username' in session:
+        restart_server()
+        return redirect(url_for('main.index'))
     else:
         return "eat shit"
 

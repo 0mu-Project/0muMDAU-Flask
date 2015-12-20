@@ -1,5 +1,5 @@
 from muMDAU_app import app
-from flask import request , session , render_template , url_for 
+from flask import request , session , render_template , url_for ,redirect
 import sqlite3 
 import setting
 import os
@@ -9,7 +9,7 @@ def panel():
         username = request.form['useradd']
         dpass = request.form['passdd']
         try:
-            with sqlite3.connect('../sqlite/0MuMDAU.db') as conn:
+            with sqlite3connect('../sqlite/0MuMDAU.db') as conn:
                 cursor = conn.cursor()
                 cursor.execute('select COUNT() as "Resault" from user where username = ?', [username])
                 answer = cursor.fetchone
@@ -39,7 +39,8 @@ def rmlog():
     if request.method == "GET" :
         if 'username' in session:
             os.remove(setting.s_log)
-            return redirect(url_for('panel'))
+            open(setting.s_log,'a').close()
+            return redirect(url_for('restart'))
         else: 
             return redirect(url_for('loginp'))
 
