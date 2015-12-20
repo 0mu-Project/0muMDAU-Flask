@@ -2,6 +2,7 @@ from muMDAU_app import app
 from flask import request , session , render_template , url_for 
 import sqlite3 
 import setting
+import os
 @app.route('/panel' , methods=['GET','POST'])
 def panel():
     if request.method == "POST":
@@ -32,3 +33,13 @@ def maintance():
             return render_template('log.html',log = f.read())
         else: 
             return redirect(url_for('loginp'))
+
+@app.route('/panel/rmlog', methods=['GET','POST'])
+def maintance():
+    if request.method == "GET" :
+        if 'username' in session:
+            os.remove(setting.s_log)
+            return redirect(url_for('panel'))
+        else: 
+            return redirect(url_for('loginp'))
+
