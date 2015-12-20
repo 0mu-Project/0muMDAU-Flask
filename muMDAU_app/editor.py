@@ -1,4 +1,4 @@
-from flask import request , session , Response , render_template , Blueprint
+from flask import request , session , Response , render_template , Blueprint , url_for 
 import os , hashlib , subprocess
 
 peditor = Blueprint('peditor',__name__)
@@ -102,5 +102,5 @@ def jsonlist(lists):
             os.makedirs(postpath)
         return 'OK'
     else:
-        return 'Eat Shit Please!'
+        return redirect(ur_for(loginp))
 

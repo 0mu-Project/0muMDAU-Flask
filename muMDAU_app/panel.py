@@ -1,5 +1,5 @@
 from muMDAU_app import app
-from flask import request , session , render_template  
+from flask import request , session , render_template , url_for 
 import sqlite3 
 import setting
 @app.route('/panel' , methods=['GET','POST'])
@@ -22,7 +22,7 @@ def panel():
         if 'username' in session:
             return render_template('panel.html', username = session['username'])
         else:
-            return render_template('login.html')
+            return redirect(url_for('loginp'))
 
 @app.route('/panel/server', methods=['GET','POST'])
 def maintance():
@@ -31,4 +31,4 @@ def maintance():
             f = open(setting.s_log)
             return render_template('log.html',log = f.read())
         else: 
-            return render_template('login.html')
+            return redirect(url_for('loginp'))
