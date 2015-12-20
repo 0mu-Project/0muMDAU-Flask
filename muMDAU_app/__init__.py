@@ -24,7 +24,7 @@ def update():
     if 'username' in session:
         gitpull()
         restart_server()
-        return redirect(url_for('main.index'))
+        return render_template('wait.html')
     else:
         return "eat shit"
 
@@ -32,7 +32,7 @@ def update():
 def restart():
     if 'username' in session:
         restart_server()
-        return redirect(url_for('main.index'))
+        return render_template('wait.html')
     else:
         return "eat shit"
 
