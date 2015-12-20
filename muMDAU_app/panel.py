@@ -35,7 +35,7 @@ def maintance():
             return redirect(url_for('loginp'))
 
 @app.route('/panel/rmlog', methods=['GET','POST'])
-def maintance():
+def rmlog():
     if request.method == "GET" :
         if 'username' in session:
             os.remove(setting.s_log)
