@@ -15,9 +15,9 @@ if __name__ == "__main__":
     logging.basicConfig(filename=setting.s_log,level=logging.DEBUG)
     print("0MuMDAU Server Run on 127.0.0.1:" + str(setting.port))
     if setting.debug == 0:
-        debugB = True
+        debugB = False 
     else:
-        debugB = False
+        debugB = True
 
     app.run(host="127.0.0.1",port=setting.port , debug=debugB)
 
