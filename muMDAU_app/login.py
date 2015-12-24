@@ -17,7 +17,7 @@ def login():
         user = request.form['buser']
         passd = request.form['bpass']
 
-        password = LoginSQL.login(user)
+        password = LoginSQL.getPass(user)
 
         if password == False:
             return '帳號錯誤'
