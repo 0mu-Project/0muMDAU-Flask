@@ -3,7 +3,7 @@ import logging,setting
 from muMDAU_app.index import main
 from muMDAU_app.editor import peditor
 from muMDAU_app.editor import markdown
-app.secret_key = 'aoksp=f^=qrt%%%___jrfw'
+app.secret_key = setting.yourkey
 from werkzeug.contrib.fixers import ProxyFix 
 app.wsgi_app = ProxyFix(app.wsgi_app)
 app.register_blueprint(peditor, url_prefix='/edit')

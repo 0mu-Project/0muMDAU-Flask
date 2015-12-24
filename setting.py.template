@@ -1,4 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/pypy3
+
+##此為設定的樣板檔，請依照下面的註解進行自己的設定檔製作
+##設定檔檔案名稱為，setting.py 請自行複製樣板檔製作
+
+##Only for 0MuServer / 0muMDAU
+
 ##Server Port Setting
 port = 8509
 
@@ -14,3 +20,5 @@ s_log = '../server.log'
 ## Database Setting
 sqliteFile = '../sqlite/0MuMDAU.db'
 
+##
+yourkey = ''
