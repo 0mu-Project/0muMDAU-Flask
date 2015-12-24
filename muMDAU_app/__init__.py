@@ -26,7 +26,7 @@ def update():
         restart_server()
         return render_template('wait.html')
     else:
-        return "eat shit"
+        return redirect(url_for("loginp"))
 
 @app.route('/restart')
 def restart():
@@ -34,7 +34,7 @@ def restart():
         restart_server()
         return render_template('wait.html')
     else:
-        return "eat shit"
+        return redirect(url_for("loginp"))
 
 @app.route('/shutdown')
 def shutdown_server():
@@ -43,7 +43,8 @@ def shutdown_server():
             pkill_server()
             return "server go to shutdown"
         else:
-            return "eat shit"
+            return redirect(url_for("loginp"))
+    
     else:
         return "debug 模式沒有開啟，請使用重新啟動"
         
