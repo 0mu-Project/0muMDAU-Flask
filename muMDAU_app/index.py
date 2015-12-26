@@ -1,5 +1,6 @@
 from muMDAU_app import app , setting
-from flask import request , render_template , Blueprint
+from flask import request , render_template , Blueprint, url_for , redirect
+from database import countUSER , ManageSQL
 import subprocess , os
 from subprocess import PIPE
 
@@ -24,4 +25,23 @@ def index():
             f.close()
             return 'OK clone'
     else:
-        return render_template('gitload.html')
+        answer = countUSER.countAdmin()
+        print(answer)
+        if answer[0] == 0 :
+            return redirect(url_for('init'))
+        else:
+            return render_template('gitload.html')
+
+@app.route('/init', methods=['GET', 'POST'])
+def init():
+    if request.method == 'POST':
+        user = request.form['buser']
+        passd = request.form['bpass']
+        import hashlib
+        hashsha = hashlib.sha256(passd.replace('\n','').encode())
+        ManageSQL.addUser(user,hashsha.hexdigest(),"1")
+        return redirect(url_for('main.index'))
+    else:
+        return render_template('first.html')
+    
+

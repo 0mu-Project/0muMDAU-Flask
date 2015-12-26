@@ -30,8 +30,7 @@ def checkenvir():
     else:
         print("Fuck U Python2")
         exit()
-                
-
+            
 def rungitpull():
     subprocess.call(['git pull'], shell=True)
 
@@ -51,8 +50,14 @@ def preDB():
 
 if __name__ == "__main__":
     while 1:
-        if portcheck(setting.port) == True:
-            if os.path.exists("_posted") == True :
-                importapp()
-            else:
-                os.makedirs("_posted")
+        if os.path.exists(setting.sqliteFile) == True:
+            if portcheck(setting.port) == True:
+                if os.path.exists("_posted") == True :
+                    importapp()
+                else:
+                    os.makedirs("_posted")
+        else:
+            print("正在建立系統環境")
+            print("伺服器更新確認中")
+            rungitpull()
+            preDB()
