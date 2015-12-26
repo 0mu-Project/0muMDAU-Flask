@@ -69,8 +69,8 @@ class ManageSQL:
     def setAdmin(username,admin):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                cursor = conn.cursor('UPDATE user SET admin=? WHERE username=?',admin,username)
-                cursor.execute()
+                values=[(admin,username),]
+                conn.executemany('UPDATE user SET admin=? WHERE username=?',values)
                 conn.commit()
                 conn.close
                 return True
@@ -81,8 +81,8 @@ class ManageSQL:
     def setPassword(username,password):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                cursor = conn.cursor('UPDATE user SET password=? WHERE username=?',username,username)
-                cursor.execute()
+                values=[(password,username),]
+                conn.executemany('UPDATE user SET password=? WHERE username=?',values)
                 conn.commit()
                 conn.close
                 return True
