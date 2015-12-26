@@ -28,6 +28,30 @@ class LoginSQL:
             password = False 
         return password
 
+class countUSER:
+    def countAdmin():
+        try:
+            with sqlite3.connect(sets.sqliteFile) as conn:
+                cursor = conn.cursor()
+                cursor.execute('select count(*) as numers from user where admin = 1')
+                usercount = cursor.fetchone()
+                conn.close
+        except:
+            conn.close
+            usercount = False 
+        return usercount
+    def countUser():
+        try:
+            with sqlite3.connect(sets.sqliteFile) as conn:
+                cursor = conn.cursor()
+                cursor.execute('select count(*) as numers from user')
+                usercount = cursor.fetchone()
+                conn.close
+        except:
+            conn.close
+            usercount = False 
+        return usercount
+
 
 class ManageSQL:
     def addUser(user,password,admin):
