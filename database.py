@@ -8,7 +8,7 @@ class InitDB:
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
                 cursor = conn.cursor()
-                cursor.execute('CREATE TABLE user(username PRIMARY KEY, password, admin)')
+                cursor.execute('CREATE TABLE user(username PRIMARY KEY, password, admin ,flogin)')
                 conn.close
                 return True
         except:
@@ -54,11 +54,11 @@ class countUSER:
 
 
 class ManageSQL:
-    def addUser(user,password,admin):
+    def addUser(user,password,admin,first):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                values=[(str(user),str(password),int(admin)),]
-                conn.executemany('INSERT INTO user VALUES (?,?,?)',values)
+                values=[(str(user),str(password),int(admin)),int(first),]
+                conn.executemany('INSERT INTO user VALUES (?,?,?,?)',values)
                 conn.commit()
                 conn.close
                 return True
