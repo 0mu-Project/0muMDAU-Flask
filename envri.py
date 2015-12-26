@@ -5,6 +5,7 @@ import sys
 import os 
 import socket
 import subprocess
+from database import InitDB
 def checkenvir():
     if sys.version_info[0] == 3:
         is_pypy = '__pypy__' in sys.builtin_module_names
@@ -44,6 +45,9 @@ def portcheck(port):
          return s.connect_ex(('localhost', port)) != 0
     finally:
         s.close()
+
+def preDB():
+    InitDB.createTable()
 
 if __name__ == "__main__":
     while 1:
