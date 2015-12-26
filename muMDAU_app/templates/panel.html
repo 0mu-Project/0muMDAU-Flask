@@ -2,33 +2,28 @@
 {% block title %}Admin Panel{% endblock %}
 {% block top %}{% include "topbar.html" %}{% endblock %}
 {% block content %}
-<br />
-<br />
-<div class="panel panel-default" style="border-radius:0 !important; border:1;">
-	<div class="panel-body">
-		<div class="col-md-2">
-			<h1 class="text-right"> {{username}}</h1>
-				<h4 class="text-right"> System Developer</h4>
-				<br />
-				<a style="text-align: right; float: right;" href="#">更換個人密碼</a>
+
+<div class="col-md-2">
+	<h1 class="text-right"> {{username}}</h1>
+	<h4 class="text-right"> System Developer</h4>
+	<br />
+	<a style="text-align: right; float: right;" href="#">更換個人密碼</a>
+</div>
+<div class="col-md-10" style="border-left: 1px solid #ccc;">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#edit">發文系統</a></li>
+		<li><a data-toggle="tab" href="#users">編者管理</a></li>
+		<li><a data-toggle="tab" href="#sysmaintan">系統維護</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="edit" class="tab-pane fade in active">
+			{% include "edit.html" %}
 		</div>
-		<div class="col-md-10" style="border-left: 1px solid #ccc;">
-			<ul class="nav nav-tabs">
-				  <li class="active"><a data-toggle="tab" href="#edit">發文系統</a></li>
-				  <li><a data-toggle="tab" href="#users">編者管理</a></li>
-				  <li><a data-toggle="tab" href="#sysmaintan">系統維護</a></li>
-			  </ul>
-			  <div class="tab-content">
-				  <div id="edit" class="tab-pane fade in active">
-					  {% include "edit.html" %}
-				  </div>
-				  <div id="users" class="tab-pane fade">
-					  {% include "user.html" %}
-				  </div>
-				  <div id="sysmaintan" class="tab-pane fade">
-					  {% include "maintenance.html"%}
-				  </div>
-		 	  </div>
+		<div id="users" class="tab-pane fade">
+			{% include "user.html" %}
+		</div>
+		<div id="sysmaintan" class="tab-pane fade">
+			{% include "maintenance.html"%}
 		</div>
 	</div>
 </div>
