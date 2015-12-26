@@ -1,6 +1,6 @@
 from muMDAU_app import app , setting
 from flask import request , render_template , Blueprint, url_for , redirect
-from database import countUSER , ManageSQL
+from database import countUSER , ManageSQL ,LoginSQL
 import subprocess , os
 from subprocess import PIPE
 
@@ -39,9 +39,25 @@ def init():
         passd = request.form['bpass']
         import hashlib
         hashsha = hashlib.sha256(passd.replace('\n','').encode())
-        ManageSQL.addUser(user,hashsha.hexdigest(),"1")
+        ManageSQL.addUser(user,hashsha.hexdigest(),"1","0")
         return redirect(url_for('main.index'))
     else:
         return render_template('first.html')
+    
+
+@app.route('/adduser', methods=['GET', 'POST'])
+def adduser():
+    if request.method == 'POST':
+        user = request.form['buser']
+        if LoginSQL.getPass(user) == False:
+            import hashlib
+            import random
+            ans = random.uniform(1, 10)
+            hashpass1 = hashlib.sha1(str(ans).encode())
+            passd1 = hashpass1.hexdigest()
+            hashpass0 = hashlib.sha256(passd1.replace('\n','').encode())
+            ManageSQL.addUser(user,hashpass0.hexdigest(),"0","1")
+        else:
+            return "使用者已經他媽的存在了喔！"
     
 
