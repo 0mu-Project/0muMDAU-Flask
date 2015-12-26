@@ -57,8 +57,8 @@ class ManageSQL:
     def addUser(user,password,admin,first):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                values=[(str(user),str(password),int(admin)),int(first),]
-                conn.executemany('INSERT INTO user VALUES (?,?,?,?)',values)
+                values=[(str(user),str(password),int(admin),int(first)),]
+                print(conn.executemany('INSERT INTO user VALUES (?,?,?,?)',values))
                 conn.commit()
                 conn.close
                 return True
