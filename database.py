@@ -90,3 +90,28 @@ class ManageSQL:
             conn.close
             return False 
 
+    def setFirst(username,first):
+        try:
+            with sqlite3.connect(sets.sqliteFile) as conn:
+                cursor = conn.cursor()
+                values=[(first,username),]
+                cursor.execute('UPDATE user SET flogin=? WHERE username=?',values)
+                data=cursor.fetchall()
+                conn.close
+                return data
+        except:
+            conn.close
+            return False
+
+    def listUser():
+        try:
+            with sqlite3.connect(sets.sqliteFile) as conn:
+                cursor = conn.cursor()
+                cursor.execute('select username from user')
+                data=cursor.fetchall()
+                conn.close
+                return data
+        except:
+            conn.close
+            return False
+
