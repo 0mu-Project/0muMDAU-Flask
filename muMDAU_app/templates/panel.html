@@ -46,6 +46,18 @@
 		});
 	}
 </script>
+<script>	
+	function delposts(url) {
+		$.ajax({
+			type : "POST",
+			url : "/md/del/posts/" + url ,
+			dataType: "text",
+			success: function(data) {
+				alert("文章已刪除");
+			}
+		});
+	}
+</script>
 <script>
 	function showmd(url) {
 		$.ajax({
@@ -70,7 +82,7 @@
 			$.each(data, function (index, value){
 				console.log(value);
 				var val = "'" + value + "'";
-				var myRow = '<tr><td>'+number + '</td><td><a href="javascript:showmd('+ val + ')"> '+ value +'</a></td></tr>';
+				var myRow = '<tr><td>'+number + '</td><td><a href="javascript:showmd('+ val + ')"> '+ value +'</a></td><td><input type="button" class="btn btn-danger" onclick="javascript:delposts('+ val + ')">刪除文章</button></td></tr>';
 			 	number = number +1;
 				$("#marktitle tr:last").after(myRow); 
 			})
@@ -80,8 +92,9 @@
 			var number =1;
 			$.each(data, function (index, value){
 				console.log(value);
-			   	var	val = "'" + value + "'";
-				var myRow = '<tr><td>'+number + '</td><td><a href="javascript:showmdposted('+ val + ')"> '+ value +'</a></td></tr>';
+				var val = "'" + value + "'";
+				var urlto = "'/del/posted/"+ value + "'";
+				var myRow = '<tr><td>'+number + '</td><td><a href="javascript:showmdposted('+ val + ')"> '+ value +'</a></td><td><imput type="button" class="btn btn-danger" onclick="javascript:location.href='+ urlto +' ">刪除文章</button></td></tr>';
 				number = number +1;
 			  	$("#markedtitle tr:last").after(myRow); 
 		  	})

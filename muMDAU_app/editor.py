@@ -1,4 +1,5 @@
-from flask import request , session , Response , render_template , Blueprint , url_for 
+from flask import request , session , Response , render_template , Blueprint , redirect , url_for
+from muMDAU_app import app 
 import os , hashlib , subprocess
 
 peditor = Blueprint('peditor',__name__)
@@ -23,7 +24,6 @@ def save():
             f = open('_posts/'+ filen  +'.markdown', 'wb+') 
             f.write(argment.encode('UTF-8'))
             f.close()
-            ans = "file open"
             return "文章已經存在本地的_posts,重新整理即可在佇列中看到"
 
 @markdown.route('/submit' , methods=['GET','POST'])
@@ -48,7 +48,6 @@ def submit():
                         f = open('_posted/'+ filen  +'.markdown', 'wb+') 
                         f.write(argment.encode('UTF-8'))
                         f.close()
-                        ans = "file open"
                         import shutil
                         shutil.copyfile('_posted/' + filen +'.markdown','./blog/_posts/' + filen +'.markdown')
                         message = 'add_new_posts_' + filen
@@ -66,6 +65,39 @@ def markdownr(listmd):
         return f.read()
     else:
         return "你怎摸不去吃大便"
+@app.route('/del/posted/<listmd>', methods=['GET','POST'])
+def delped(listmd):
+    if request.method == "POST":
+        user = request.form['buser']
+        passd = request.form['bpass']
+        hashsha =  hashlib.sha256(passd.replace('\n','').encode())
+        pathuser = "../../pskey/" + user
+        if os.path.exists(pathuser) == True :
+            with open( pathuser ,'r' ) as f:
+                fline = f.readline()
+                if fline.replace('\n' , '')  == hashsha.hexdigest() :
+                    filepath = './blog/_posts/' + str(listmd)
+                    os.remove(filepath)
+                    message = 'del_posts'
+                    subprocess.call(['bash script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message ], shell=True)
+                    return "文章已刪除.." 
+                else:
+                    return "密碼錯誤是要登入三小"
+        else:
+            return "帳號錯誤是要登入三小"
+    else:
+        return render_template("killfile.html",posts = listmd)
+
+
+@markdown.route('/del/posts/<listmd>', methods=['GET','POST'])
+def delposts(listmd):
+    if request.method == "POST":
+        filepath = './_posts/' + str(listmd)
+        os.remove(filepath)
+        return "OK"
+    else:
+        return "你怎摸不去吃大便"
+
 
 @markdown.route('/listed/<listposed>', methods=['GET','POST'])
 def markdownrp(listposed):
@@ -102,5 +134,5 @@ def jsonlist(lists):
             os.makedirs(postpath)
         return 'OK'
     else:
-        return redirect(ur_for(loginp))
+        return redirect(url_for("loginp"))
 

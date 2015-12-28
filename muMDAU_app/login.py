@@ -1,6 +1,6 @@
 from muMDAU_app import app 
 from flask import session,redirect,url_for,request,render_template
-import sqlite3,hashlib
+import hashlib
 from database import LoginSQL
 
 @app.route('/login/panel')

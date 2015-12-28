@@ -18,6 +18,6 @@ if __name__ == "__main__":
         debugB = False 
     else:
         debugB = True
-
+        print("fuu")
     app.run(host="127.0.0.1",port=setting.port , debug=debugB)
 

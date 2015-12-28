@@ -1,4 +1,5 @@
-from muMDAU_app import app , setting
+from muMDAU_app import app 
+import setting
 from flask import request , render_template , Blueprint, url_for , redirect
 from database import countUSER , ManageSQL ,LoginSQL
 import subprocess , os
