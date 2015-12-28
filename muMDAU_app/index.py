@@ -50,7 +50,8 @@ def init():
 def adduser():
     if request.method == 'POST':
         user = request.form['buser']
-        if LoginSQL.getPass(user) == False:
+        print(LoginSQL.getPass(user))
+        if LoginSQL.getPass(user) == None:
             import hashlib
             import random
             ans = random.uniform(1, 10)
@@ -58,6 +59,7 @@ def adduser():
             passd1 = hashpass1.hexdigest()
             hashpass0 = hashlib.sha256(passd1.replace('\n','').encode())
             ManageSQL.addUser(user,hashpass0.hexdigest(),"0","1")
+            return passd1
         else:
             return "使用者已經他媽的存在了喔！"
     
