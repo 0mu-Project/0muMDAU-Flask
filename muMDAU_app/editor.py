@@ -121,7 +121,7 @@ def jsonlist(lists):
                     import json
                     jsondump = json.dumps(data,separators=( ',' , ':'))
                     resp = Response(response=jsondump,status=200, mimetype="application/json")
-                    return(resp)
+                return(resp)
         else:
             os.makedirs(postpath)
         return 'OK'
