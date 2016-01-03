@@ -1,6 +1,7 @@
 from flask import request , session , Response , render_template , Blueprint , redirect , url_for
 from muMDAU_app import app 
 import os , hashlib , subprocess
+from subprocess import PIPE
 
 peditor = Blueprint('peditor',__name__)
 markdown = Blueprint('markdown',__name__)
@@ -39,24 +40,15 @@ def submit():
         else:
             user = request.form['username']
             passd = request.form['password']
-            pathuser = "../../pskey/" + user
-            hashsha =  hashlib.sha256(passd.replace('\n','').encode())
-            if os.path.exists(pathuser) == True :
-                with open( pathuser ,'r' ) as f:
-                    fline = f.readline()
-                    if fline.replace('\n' , '')  == hashsha.hexdigest() :
-                        f = open('_posted/'+ filen  +'.markdown', 'wb+') 
-                        f.write(argment.encode('UTF-8'))
-                        f.close()
-                        import shutil
-                        shutil.copyfile('_posted/' + filen +'.markdown','./blog/_posts/' + filen +'.markdown')
-                        message = 'add_new_posts_' + filen
-                        subprocess.call(['bash script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message ], shell=True)
-                        return "文章已經存在本地的_posted,文章即將發布.." 
-                    else:
-                        return "密碼錯誤是要登入三小"
-            else:
-                return "帳號錯誤是要登入三小"
+            f = open('_posted/'+ filen  +'.markdown', 'wb+') 
+            f.write(argment.encode('UTF-8'))
+            f.close()
+            import shutil
+            shutil.copyfile('_posted/' + filen +'.markdown','./blog/_posts/' + filen +'.markdown')
+            message = 'add_new_posts_' + filen
+            gitdoit = subprocess.Popen(['bash script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message ], shell=True , stdout = PIPE , stderr=PIPE )
+            outcode , error = gitdoit.communicate()
+            return outcode
         
 @markdown.route('/list/<listmd>', methods=['GET','POST'])
 def markdownr(listmd):
