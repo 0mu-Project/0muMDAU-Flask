@@ -1,5 +1,8 @@
-from flask import Flask, request , session , redirect , url_for
+# -*- coding: utf-8 -*-
+
+from flask import Flask, request, session, redirect, url_for
 from flask import render_template 
+
 app = Flask(__name__)
 
 import subprocess
@@ -7,15 +10,16 @@ import muMDAU_app.login
 import muMDAU_app.logout 
 import muMDAU_app.panel
 
+
 def restart_server():
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
 def gitpull():
-    subprocess.call(["git pull"],shell=True)
+    subprocess.call(['git pull'], shell=True)
 def pkill_server():
-    subprocess.call(["pkill pypy3"],shell=True)
+    subprocess.call(['pkill pypy3'], shell=True)
 
 @app.route('/update')
 def update():
@@ -24,7 +28,7 @@ def update():
         restart_server()
         return render_template('wait.html')
     else:
-        return redirect(url_for("loginp"))
+        return redirect(url_for('loginp'))
 
 @app.route('/restart')
 def restart():
@@ -32,17 +36,15 @@ def restart():
         restart_server()
         return render_template('wait.html')
     else:
-        return redirect(url_for("loginp"))
+        return redirect(url_for('loginp'))
 
 @app.route('/shutdown')
 def shutdown_server():
-    if muMDAU_app.setting.debug == 1 :
+    if muMDAU_app.setting.debug == 1:
         if 'username' in session:
             pkill_server()
-            return "server go to shutdown"
+            return 'server go to shutdown'
         else:
-            return redirect(url_for("loginp"))
-    
+            return redirect(url_for('loginp'))
     else:
-        return "debug 模式沒有開啟，請使用重新啟動"
-        
+        return 'debug 模式沒有開啟，請使用重新啟動'

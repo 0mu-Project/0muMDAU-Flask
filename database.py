@@ -1,4 +1,5 @@
 #!/usr/bin/pypy3
+# -*- coding: utf-8 -*-
 
 import sqlite3
 import setting as sets
@@ -20,12 +21,12 @@ class LoginSQL:
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
                 cursor = conn.cursor()
-                cursor.execute('select password from user where username=?',[user])
+                cursor.execute('select password from user where username=?', [user])
                 password = cursor.fetchone()
                 conn.close
         except:
             conn.close
-            password = False 
+            password = False
         return password
 
 class countUSER:
@@ -54,11 +55,11 @@ class countUSER:
 
 
 class ManageSQL:
-    def addUser(user,password,admin,first):
+    def addUser(user, password, admin, first):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                values=[(str(user),str(password),int(admin),int(first)),]
-                print(conn.executemany('INSERT INTO user VALUES (?,?,?,?)',values))
+                values = [(str(user), str(password), int(admin), int(first)), ]
+                print(conn.executemany('INSERT INTO user VALUES (?,?,?,?)', values))
                 conn.commit()
                 conn.close
                 return True
@@ -66,11 +67,11 @@ class ManageSQL:
             conn.close
             return False
 
-    def setAdmin(username,admin):
+    def setAdmin(username, admin):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                values=[(admin,username),]
-                conn.executemany('UPDATE user SET admin=? WHERE username=?',values)
+                values = [(admin, username), ]
+                conn.executemany('UPDATE user SET admin=? WHERE username=?', values)
                 conn.commit()
                 conn.close
                 return True
@@ -78,11 +79,11 @@ class ManageSQL:
             conn.close
             return False 
 
-    def setPassword(username,password):
+    def setPassword(username, password):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
-                values=[(password,username),]
-                conn.executemany('UPDATE user SET password=? WHERE username=?',values)
+                values = [(password, username), ]
+                conn.executemany('UPDATE user SET password=? WHERE username=?', values)
                 conn.commit()
                 conn.close
                 return True
@@ -90,13 +91,13 @@ class ManageSQL:
             conn.close
             return False 
 
-    def setFirst(username,first):
+    def setFirst(username, first):
         try:
             with sqlite3.connect(sets.sqliteFile) as conn:
                 cursor = conn.cursor()
-                values=[(first,username),]
-                cursor.execute('UPDATE user SET flogin=? WHERE username=?',values)
-                data=cursor.fetchall()
+                values = [(first, username), ]
+                cursor.execute('UPDATE user SET flogin=? WHERE username=?', values)
+                data = cursor.fetchall()
                 conn.close
                 return data
         except:
@@ -108,10 +109,9 @@ class ManageSQL:
             with sqlite3.connect(sets.sqliteFile) as conn:
                 cursor = conn.cursor()
                 cursor.execute('select username from user')
-                data=cursor.fetchall()
+                data = cursor.fetchall()
                 conn.close
                 return data
         except:
             conn.close
             return False
-

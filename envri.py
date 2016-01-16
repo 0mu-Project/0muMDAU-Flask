@@ -2,36 +2,42 @@
 # -*- coding: utf-8 -*-
 import setting
 import sys
-import os 
+import os
 import socket
 import subprocess
 from database import InitDB
+
 def checkenvir():
     if sys.version_info[0] == 3:
         is_pypy = '__pypy__' in sys.builtin_module_names
-        if is_pypy == True:
+        if is_pypy is True:
             try:
                 import flask
-                return "pypy3"
+                return 'pypy3'
             except ImportError:
-                print("環境檢測中...")
-                print("您的電腦沒有flask請輸入密碼自動安裝")
-                subprocess.call(['sudo pypy3 -m pip install Flask'],shell=True)
-                return "pypy3"
+                try:
+                    import pip  # NOQA
+                    print('You dont have flask install , Auto Install!')
+                    print('Please enter root password !')
+                    subprocess.call(['sudo pypy3 -m pip install Flask'], shell=True)
+                except ImportError:
+                    print('You dont have pip install , please input your password to install ')
+                    subprocess.call(['curl -s https://bootstrap.pypa.io/get-pip.py |sudo pypy3'], shell=True)
+                return 'pypy3'
         else:
             try:
                 import flask
-                return "python3"
+                assert flask
+                return 'python3'
             except ImportError:
-                print("環境檢測中...")
-                print("您的電腦沒有flask請輸入密碼自動安裝")
-                subprocess.call(['sudo python3 -m pip install Flask'],shell=True)
-                return "python3"
+                print('You dont have flask install , please input your password to install flask . ')
+                subprocess.call(['sudo python3 -m pip install Flask'], shell=True)
+                return 'python3'
     else:
-        print("Fuck U Python2")
-        exit()
-            
+        return 'python2'
+
 def rungitpull():
+    print('# Git status')
     subprocess.call(['git pull'], shell=True)
 
 def importapp():
@@ -41,23 +47,27 @@ def portcheck(port):
     s = socket.socket()
     s.settimeout(0.5)
     try:
-         return s.connect_ex(('localhost', port)) != 0
+        return s.connect_ex(('localhost', port)) != 0
     finally:
         s.close()
 
 def preDB():
     InitDB.createTable()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     while 1:
-        if os.path.exists(setting.sqliteFile) == True:
-            if portcheck(setting.port) == True:
-                if os.path.exists("_posted") == True :
+        if os.path.exists(setting.sqliteFile):
+            print('Now 0mu-WatchDog is run')
+            if portcheck(setting.port):
+                if os.path.exists('_posted'):
                     importapp()
                 else:
-                    os.makedirs("_posted")
+                    os.makedirs('_posted')
         else:
-            print("正在建立系統環境")
-            print("伺服器更新確認中")
+            print('Welcome to use 0MuMDAU first time init')
+            print('(1/3) Now check server repo for update')
             rungitpull()
+            print('(2/3) Now checking your system environment')
+            print('Your python is : ' + checkenvir())
+            print('(3/3) Now prepare your database')
             preDB()
