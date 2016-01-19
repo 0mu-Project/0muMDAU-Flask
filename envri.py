@@ -26,8 +26,7 @@ def checkenvir():
                 return 'pypy3'
         else:
             try:
-                import flask
-                assert flask
+                import flask  # NOQA
                 return 'python3'
             except ImportError:
                 print('You dont have flask install , please input your password to install flask . ')
