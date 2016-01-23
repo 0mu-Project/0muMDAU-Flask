@@ -1,12 +1,23 @@
 # -*- coding: utf-8 -*-
 
 from flask import request, session, Response, render_template, Blueprint, redirect, url_for
-from muMDAU_app import app 
+from muMDAU_app import app
 import os, hashlib, subprocess
+import setting
 from subprocess import PIPE
-
+from muMDAU_app.flask_imgur import Imgur
+app.config['IMGUR_ID'] = setting.imgurkey
+imgur_handler = Imgur(app)
 peditor = Blueprint('peditor', __name__)
 markdown = Blueprint('markdown', __name__)
+
+@app.route('/upload/imgur', methods=['GET', 'POST'])
+def imgurupload():
+    if request.method == 'POST':
+        image = request.files['fileToUpload']
+        image_data = imgur_handler.send_image(image)
+        return image_data['data']['link'] 
+
 @peditor.route('/')
 def edit(username=None):
     if 'username' in session:

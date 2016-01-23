@@ -102,6 +102,20 @@
 	});
 </script>	  
 <script>
+$(function() {
+	$("button#uploadfile").click(function(){
+		$.ajaxFileUpload({
+            url:'/upload/imgur', 
+            secureuri:false,
+            fileElementId:'fileToUpload',
+            dataType: 'text',
+			success: function (data) { alert(data);},
+			error: function() { alert("imgur炸了或是你的圖片炸了"); }
+        });
+	});
+});
+</script>
+<script>
 	$(function() {
 		$("button#save").click(function(){
 				$.ajax({
