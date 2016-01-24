@@ -47,6 +47,13 @@ def submit():
         fil = request.form['title']
         import datetime
         now = datetime.datetime.now()
+        directory = os.path.expanduser('./blog/_posts/')
+        for f in os.listdir(directory):
+            if os.path.isfile(os.path.join(directory, f)):
+                ldata = f.split('-', 3)
+                name = str(ldata[-1]).split('.markdown')
+                if str(name[0]) == str(fil):
+                    os.remove('./blog/_posts/' + str(f))
         filen = now.strftime('%Y-%m-%d') + '-' + fil 
         if not fil.strip():
             return '打檔名拉,e04'

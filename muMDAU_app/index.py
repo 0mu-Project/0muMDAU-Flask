@@ -29,7 +29,6 @@ def index():
             return 'OK clone'
     else:
         answer = countUSER.countAdmin()
-        print(answer)
         if answer[0] == 0:
             return redirect(url_for('init'))
         else:
@@ -51,7 +50,6 @@ def init():
 def adduser():
     if request.method == 'POST':
         user = request.form['buser']
-        print(LoginSQL.getPass(user))
         if LoginSQL.getPass(user) is None:
             import hashlib
             import random
