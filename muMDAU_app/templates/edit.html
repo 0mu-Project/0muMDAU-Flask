@@ -18,14 +18,14 @@ date:   20xx-xx-xx xx:xx:xx
 <!-- 內文  -->
 			</textarea> 
 			<hr />
-		<div class="row">
-			<div class="col-md-10">
+		<div class="row" style="position: relative;">
+			<div class="col-md-9">
 				<form name="imgurup" action="" method="POST" enctype="multipart/form-data"> 
 					<input class="file" name="fileToUpload" type="file" id="fileToUpload">
 				</form>
 			</div>
-			<div class="col-md-2">
-				<div class="btn-group" role="group" aria-label="Submit Option">
+			<div class="col-md-3">
+				<div class="btn-group pull-right" role="group" aria-label="Submit Option">
 					<button id="uploadfile" class="btn btn-success">	
 					<span class="glyphicon glyphicon-open" aria-hidden="true"></span>
 					點此上傳圖片</button>
@@ -33,8 +33,8 @@ date:   20xx-xx-xx xx:xx:xx
 			</div>
 		</div>
 			<hr/>
-		<div class="row">
-			<div class="col-md-10">
+		<div class="row" style="position: relative;">
+			<div class="col-md-9">
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon3">Github 帳號</span>
 					<input class="form-control" type="text" name="username" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
@@ -45,16 +45,17 @@ date:   20xx-xx-xx xx:xx:xx
 					<input class="form-control" type="password" name="password" size="20" placeholder="請輸入您Github的密碼"><br>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3" style="position: absolute;  bottom: 0; right:0;">
+				 <div class="btn-group pull-right" role="group">
 				<button type="submit" id="save" class="btn btn-success">
 					<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
 					只儲存在本地
 				</button>
-				<hr/>
 				<button type="submit" id="submit" class="btn btn-warning">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					直接發表此文
 				</button>
+				</div>
 			</div>
 			</div>
 		</form>
