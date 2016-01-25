@@ -3,15 +3,7 @@
 		<img style="display:block; margin:auto;" src="static/img/edit.jpg" width="100%" height"50%"></img>
 		<br />
 		<form id="form" class="createtable">
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon3">Github 帳號</span>
-				<input class="form-control" type="text" name="username" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
-			</div></br>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon3">Github 密碼</span>
-				<input class="form-control" type="password" name="password" size="20" placeholder="請輸入您Github的密碼"><br>
-			</div></br>
-			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="格式 不可中文 不可空白" id = "fc-inp"></br>
+			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="標題 *格式 不可中文 不可空白" id = "fc-inp"></br>
 			<textarea class="content" name="content" data-provide="markdown" rows="20">---
 layout: post
 title:  "" 
@@ -25,31 +17,48 @@ date:   20xx-xx-xx xx:xx:xx
 -->
 <!-- 內文  -->
 			</textarea> 
-			<hr/>
-		</form>
+			<hr />
 		<div class="row">
 			<div class="col-md-10">
-	<form name="imgurup" action="" method="POST" enctype="multipart/form-data"> 
-  		上傳圖片到imgur :
-		<input name="fileToUpload" type="file" id="fileToUpload">
-	</form>
-	</div>
-	<div class="col-md-2">
-	<div class="btn-group pull-right" role="group" aria-label="Submit Option">
-		<button id="uploadfile" class="btn btn-success">Save </button>	
-	</div>
-	</div>
-	</div>
-	<hr/>
-		<div class="btn-group pull-right" role="group" aria-label="Submit Option">
-			<button type="submit" id="save" class="btn btn-success">
-				<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-				只儲存在本地</button>
-			<button type="submit" id="submit" class="btn btn-warning">
-				<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-				直接發表此文
-			</button>
+				<form name="imgurup" action="" method="POST" enctype="multipart/form-data"> 
+					<input class="file" name="fileToUpload" type="file" id="fileToUpload">
+				</form>
+			</div>
+			<div class="col-md-2">
+				<div class="btn-group" role="group" aria-label="Submit Option">
+					<button id="uploadfile" class="btn btn-success">	
+					<span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+					點此上傳圖片</button>
+				</div>
+			</div>
 		</div>
+			<hr/>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon3">Github 帳號</span>
+					<input class="form-control" type="text" name="username" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
+				</div>
+				<hr />
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon3">Github 密碼</span>
+					<input class="form-control" type="password" name="password" size="20" placeholder="請輸入您Github的密碼"><br>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button type="submit" id="save" class="btn btn-success">
+					<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
+					只儲存在本地
+				</button>
+				<hr/>
+				<button type="submit" id="submit" class="btn btn-warning">
+					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+					直接發表此文
+				</button>
+			</div>
+			</div>
+		</form>
+			<hr/>
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#posts">尚未發布</a></li>
 			<li><a data-toggle="tab" href="#posted">已經發布</a></li>

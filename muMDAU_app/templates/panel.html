@@ -3,14 +3,7 @@
 {% block top %}{% include "topbar.html" %}{% endblock %}
 {% block content %}
 
-<div class="col-md-2">
-	<h4 class="text-right"> {{username}}</h4>
-	<h4 class="text-right"> (System Developer)</h4>
-
-	<br />
-	<a style="text-align: right; float: right;" href="#">更換個人密碼</a>
-</div>
-<div class="col-md-10" style="border-left: 1px solid #ccc;">
+<div class="col-md-12">
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#edit">發文系統</a></li>
 		<li><a data-toggle="tab" href="#users">編者管理</a></li>
@@ -102,6 +95,7 @@
 	});
 </script>	  
 <script>
+$("#fileToUpload").fileinput({'showUpload':false, 'previewFileType':'any'});
 $(function() {
 	$("button#uploadfile").click(function(){
 		$.ajaxFileUpload({
