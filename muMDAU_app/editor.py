@@ -60,11 +60,9 @@ def submit():
         else:
             user = request.form['username']
             passd = request.form['password']
-            f = open('_posted/' + filen + '.markdown', 'wb+') 
+            f = open('./blog/_posts/' + filen + '.markdown', 'wb+') 
             f.write(argment.encode('UTF-8'))
             f.close()
-            import shutil
-            shutil.copyfile('_posted/' + filen + '.markdown', './blog/_posts/' + filen + '.markdown')
             message = 'add_new_posts_' + filen
             gitdoit = subprocess.Popen(['bash script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message], shell=True, stdout=PIPE, stderr=PIPE)
             outcode, error = gitdoit.communicate()
