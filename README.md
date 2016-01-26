@@ -7,7 +7,7 @@
 簡稱 : 0muMDAU-Flask  
 前端 : Bootstrap/Html5/jQuery  
 後端 : Python3/Flask/SQLite3/Git/Shell-Script  
-編輯 : bootstrap markdown（[link](https://github.com/toopay/bootstrap-markdown))  
+編輯 : simplemde-markdown-editor（[link](https://github.com/NextStepWebs/simplemde-markdown-editor))  
   
   
   
