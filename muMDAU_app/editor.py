@@ -132,6 +132,7 @@ def jsonlist(lists):
             if os.listdir(directory) is None:
                 return('['']')
             else:
+                resp = '['']'
                 for f in os.listdir(directory):
                     if os.path.isfile(os.path.join(directory, f)):
                         i = i + 1
