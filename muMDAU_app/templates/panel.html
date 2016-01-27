@@ -61,7 +61,7 @@
 				var title = url.split(".",1);
 				var titles = title.toString();
 				var titled = titles.substr(11);
-				$("textarea.content").data('markdown').setContent(data);
+				simplemde.value(data);
 				$("#fc-inp").val(titled);
 			}
 		});
