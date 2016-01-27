@@ -29,3 +29,17 @@ def rmlog():
             return redirect(url_for('restart'))
         else: 
             return redirect(url_for('loginp'))
+
+@app.route('/dev/panel')
+def mainten():
+    if 'username' in session:
+        return render_template('maintenancep.html', username=session['username'])
+    else:
+        return redirect(url_for('loginp'))
+
+@app.route('/user/panel')
+def userp():
+    if 'username' in session:
+        return render_template('userp.html', username=session['username'])
+    else:
+        return redirect(url_for('loginp'))
