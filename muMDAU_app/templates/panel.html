@@ -94,7 +94,8 @@ $(function() {
 <script>
 	$(function() {
 		$("button#save").click(function(){
-				$.ajax({
+		   	$("#markdown").val(simplemde.value());	
+			$.ajax({
 		 			type: "POST",
 		 			url: "/md/save",
 					data: $('#form').serialize(),
@@ -110,6 +111,7 @@ $(function() {
 <script>
 	$(function() {
 		$("button#submit").click(function(){
+		   	$("#markdown").val(simplemde.value());	
 		   	$.ajax({
 		 		type: "POST",
 				url: "/md/submit",
