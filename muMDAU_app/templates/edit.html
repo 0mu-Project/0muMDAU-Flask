@@ -1,7 +1,8 @@
 		<img style="display:block; margin:auto;" src="static/img/edit.jpg" width="100%" height"50%"></img>
 		<br />
 		<form id="form" class="createtable">
-			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="標題 *格式 不可中文 不可空白" id = "fc-inp"></br>
+			<div>
+				<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="標題 *格式 不可中文 不可空白" id = "fc-inp"></br>
 		<textarea id="markdown" class="content" name="content">
 ---
 layout: post
@@ -17,9 +18,8 @@ post_author:
 	post_author: 作者
 -->
 <!-- 內文  -->
-						
 		</textarea> 
-			<hr />
+		<hr/>
 		<div class="row" style="position: relative;">
 			<div class="col-md-9">
 				<form name="imgurup" action="" method="POST" enctype="multipart/form-data"> 
@@ -34,7 +34,7 @@ post_author:
 				</div>
 			</div>
 		</div>
-			<hr/>
+		<hr/>
 		<div class="row" style="position: relative;">
 			<div class="col-md-9">
 				<div class="input-group">
@@ -49,16 +49,17 @@ post_author:
 			</div>
 			<div class="col-md-3" style="position: absolute;  bottom: 0; right:0;">
 				 <div class="btn-group pull-right" role="group">
-				<button type="submit" id="save" class="btn btn-success">
-					<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-					只儲存在本地
-				</button>
-				<button type="submit" id="submit" class="btn btn-warning">
-					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-					直接發表此文
-				</button>
+	 				 <button type="submit" id="save" class="btn btn-success">
+						 <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
+						 只儲存在本地
+				 	 </button>
+	 				 <button type="submit" id="submit" class="btn btn-warning">
+		 				 <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+			 			 直接發表此文
+				 	 </button>
 				</div>
 			</div>
+		</div>
 			</div>
 		</form>
 			<hr/>
