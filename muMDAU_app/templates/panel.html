@@ -94,7 +94,8 @@ $(function() {
 <script>
 	$(function() {
 		$("button#save").click(function(){
-		   	$("#markdown").val(simplemde.value());	
+			e.preventDefault();
+			$("#markdown").val(simplemde.value());	
 			$.ajax({
 		 			type: "POST",
 		 			url: "/md/save",
@@ -104,13 +105,14 @@ $(function() {
 						alert(data);},
 					error: function(){ alert("503 error");} 
 			});
-			
+			return false;
 		});
 	});
 </script>
 <script>
 	$(function() {
 		$("button#submit").click(function(){
+			e.preventDefault();
 		   	$("#markdown").val(simplemde.value());	
 		   	$.ajax({
 		 		type: "POST",
@@ -121,6 +123,7 @@ $(function() {
 					alert(data);},
 				error: function(){ alert("503 error");} 
 			});
+			return false;
 		});
 	});
 </script>
