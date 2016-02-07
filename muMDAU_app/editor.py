@@ -66,6 +66,7 @@ def submit():
             message = 'add_new_posts_' + filen
             gitdoit = subprocess.Popen(['bash script/autoAuth.sh ' + user + ' ' + passd + ' ./blog ' + message], shell=True, stdout=PIPE, stderr=PIPE)
             outcode, error = gitdoit.communicate()
+            print(outcode)
             return outcode
 
 @markdown.route('/list/<listmd>', methods=['GET', 'POST'])
