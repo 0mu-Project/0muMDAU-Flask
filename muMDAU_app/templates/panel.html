@@ -104,17 +104,16 @@ $(function() {
 						alert(data);},
 					error: function(){ alert("503 error");} 
 			});
-			e.preventDefault();
-			return false;
 		});
 	});
 </script>
 <script>
 	$(function() {
 		$("button#submit").click(function(){
-			e.preventDefault();
 		   	$("#markdown").val(simplemde.value());	
-		   	$.ajax({
+			$("#username").val($("#user").val());
+			$("#password").val($("#passw").val());
+			$.ajax({
 		 		type: "POST",
 				url: "/md/submit",
 				datatype: "text",
@@ -123,8 +122,6 @@ $(function() {
 					alert(data);},
 				error: function(){ alert("503 error");} 
 			});
-			e.preventDefault();
-			return false;
 		});
 	});
 </script>
