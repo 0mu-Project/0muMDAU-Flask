@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# muMDAU_app main / first page 
 from muMDAU_app import app 
 import setting
 from flask import request, render_template, Blueprint, url_for, redirect
@@ -9,18 +9,23 @@ from subprocess import PIPE
 
 main = Blueprint('main', __name__)
 
+# index page main route page 
 @main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         blogpath = './blog'
+        # check blog repo
         if os.path.exists(blogpath):
+            # if blog repo found run pull merge 
             p = subprocess.Popen(['git pull'], shell=True, cwd='./blog', stdout=PIPE)
             outcode, error = p.communicate()
             f = open(setting.s_log, 'ab')
+            # add git log to server.log
             f.write(str.encode('INFO:pull_blog:git -- ') + outcode)
             f.close()
             return 'OK'
         else:
+            # if blog not found run clone new blog repo
             p = subprocess.Popen(['git clone ' + setting.gitpath], cwd='./', shell=True, stdout=PIPE, stderr=PIPE)
             outcode, gitlog = p.communicate()
             f = open(setting.s_log, 'ab')
@@ -28,12 +33,14 @@ def index():
             f.close()
             return 'OK clone'
     else:
+        # check admin is visable ?
         answer = countUSER.countAdmin()
         if answer[0] == 0:
             return redirect(url_for('init'))
         else:
             return render_template('gitload.html')
 
+# init route to first time use
 @app.route('/init', methods=['GET', 'POST'])
 def init():
     if request.method == 'POST':
@@ -46,6 +53,7 @@ def init():
     else:
         return render_template('first.html')
 
+# test of adduser route page 
 @app.route('/adduser', methods=['GET', 'POST'])
 def adduser():
     if request.method == 'POST':
