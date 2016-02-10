@@ -20,3 +20,4 @@ Editor of Front-End : simplemde-markdown-editor（[link](https://github.com/Next
 ####Other
 -------------
 更多細節歡迎參考官方blog reimu.dd-han.tw
+Only for linux/OS X(uncheck)  ! Not support Windows
