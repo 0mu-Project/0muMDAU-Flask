@@ -1,34 +1,22 @@
-# 0mu MarkDown Auto Uploading Control Panel
+# 0mu Markdown Distributed Automatic-git Upload-sys
 
-  
-  
-####0mu動態式分散部落格管理系統
+####How to
 -------------
-簡稱 : 0muMDAU-Flask  
-前端 : Bootstrap/Html5/jQuery  
-後端 : Python3/Flask/SQLite3/Git/Shell-Script  
-編輯 : simplemde-markdown-editor（[link](https://github.com/NextStepWebs/simplemde-markdown-editor))  
+Short-Name : 0muMDAU-Flask  
+Front-End : Bootstrap/Html5/jQuery  
+Back-End  : pypy3 or python3/Flask/SQLite3/Git/ShellScript  
+Editor of Front-End : simplemde-markdown-editor（[link](https://github.com/NextStepWebs/simplemde-markdown-editor))  
+ 
   
-  
-  
-####為何需要
+####Why
 -------------
-
-現在很紅的靜態化部落格有個缺點 他 沒 有 後台 , 所以常常需要這堆指令
-
-```
-vim _post/xxx.md 
-```
-```
-git add _post/xxx.md
-```
-```
-git co -a
-```
-```
-git pull
-```
+現在很紅的靜態化部落格有個缺點 他 沒 有 後台 , 
 
 有點麻煩吧... 因此 我們想出要製作一個可以視覺化管理的後台
 
 就有了這個東西產生了
+
+
+####Other
+-------------
+更多細節歡迎參考官方blog reimu.dd-han.tw
