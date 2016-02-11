@@ -8,7 +8,6 @@
 	<link rel="stylesheet" type="text/css" media="screen" href= "../static/css/fileinput.min.css" >
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 	<link rel="stylesheet" type="text/css" media="screen" href= "../static/css/base.css" >
-	<link rel="stylesheet" type="text/css" media="screen" href= "../static/css/bootstrap-markdown.min.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 	<title>{% block title %}{% endblock %} - 0muMDAU</title>
 	{% endblock %}  
@@ -23,6 +22,7 @@
 						<div class="panel-body">
 							<div class="panel panel-default" style="border-radius:10px; border: 0px;" id="load">
 								<div class="panel-body">
+						{% block contentload %}{% endblock %}
 						{% block content %}{% endblock %}
 						</div>
 	</div>

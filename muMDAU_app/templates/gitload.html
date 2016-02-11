@@ -1,13 +1,11 @@
 {% extends "nbase.html" %}
 {% block title %}Github Check{% endblock%}
 {% block content %}
-						  <img style="display:block; margin:auto;" src="/static/img/pullw.jpg" width="70%" height"70%"></img>
-						  </br>
-						  <h2>正在從您設定的github repo抓取是否有新的更新</h2>
-						  </br>
-						  <p>假如您是第一次進入本後台，系統會自動抓取repo到 ./blog 位置</p>
-							  <p>請稍後...正在載入 Markdown Editor !</p>
-							  <p>請不要離開本頁面 謝謝！</p>
+<div>
+<img style="display:block; margin:auto;" src="/static/img/pullw.jpg" width="70%" height"70%"></img>						  </div>
+<div class="ui active inverted dimmer">
+<div class="ui text loader">正在抓取 GitHub Repo 更新</div>
+</div>
 {% endblock %}
 {% block script %}
 	  <script>

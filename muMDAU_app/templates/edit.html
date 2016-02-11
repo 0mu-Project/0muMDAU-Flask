@@ -2,7 +2,10 @@
 		<br />
 		<form id="form" class="createtable">
 		<div>
-			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="標題 *格式 不可中文 不可空白" id = "fc-inp"></br>
+			<div class="ui fluid input">
+			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="標題 *格式 不可中文 不可空白" id = "fc-inp">
+			</div>
+			</br>
 		<textarea id="markdown" class="content" name="content">
 ---
 layout: post
@@ -19,14 +22,14 @@ post_author:
 -->
 <!-- 內文  -->
 		</textarea> 
-		<hr/>
-		<div class="row" style="position: relative;">
-			<div class="col-md-9">
+		<div class="ui divider"></div>
+		<div class="ui grid">
+			<div class="thirteen wide column">
 				<form name="imgurup" action="" method="POST" enctype="multipart/form-data"> 
 					<input class="file" name="fileToUpload" type="file" id="fileToUpload">
 				</form>
 			</div>
-			<div class="col-md-3">
+			<div class="three wide column">
 				<div class="btn-group pull-right" role="group" aria-label="Submit Option">
 					<button id="uploadfile" class="btn btn-success">	
 					<span class="glyphicon glyphicon-open" aria-hidden="true"></span>
@@ -36,57 +39,63 @@ post_author:
 		</div>
 		 <input type="hidden" name="password" id="password" value="">
 		  <input type="hidden" name="username" id="username" value="">
-		<hr/>
-			</div>
+		  <div class="ui divider"></div>	
+		</div>
 		</form>
-		<div class="row" style="position: relative;">
-			<div class="col-md-9">
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon3">Github 帳號</span>
+		<div class="ui grid">
+			<div class="thirteen wide column">
+				<div class="ui labeled fluid input">
+					<div class="ui label">Github 帳號</div>
 					<input class="form-control" type="text" id="user" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
 				</div>
-				<hr />
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon3">Github 密碼</span>
+				<div class="ui divider"></div>
+				<div class="ui labeled fluid input">
+					<div class="ui label">Github 密碼</div>
 					<input class="form-control" type="password" id="passw" size="20" placeholder="請輸入您Github的密碼"><br>
 				</div>
 			</div>
-			<div class="col-md-3" style="position: absolute;  bottom: 0; right:0;">
-				 <div class="btn-group pull-right" role="group">
-	 				 <button type="submit" id="save" class="btn btn-success">
-						 <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-						 只儲存在本地
-				 	 </button>
-	 				 <button type="submit"  id="submit" class="btn btn-warning">
-		 				 <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-			 			 直接發表此文
-				 	 </button>
+			<div class="three wide column">
+				<div class="ui buttons">
+					  <button  type="submit" id="save" class="ui button">存本地</button>
+					    <div class="or"></div>
+					  <button type="submit"  id="submit" class="ui positive button">即發佈</button>
 				</div>
 			</div>
 		</div>
-			<hr/>
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#posts">尚未發布</a></li>
-			<li><a data-toggle="tab" href="#posted">已經發布</a></li>
-		</ul>
-		<div class="tab-content">
-			<div id="posts" class="tab-pane fade in active">	
-				<table id="marktitle" class="table">
-					<tr>
-						<th>佇列</th>
-						<th>檔案名稱</th>	
-						<th>刪除文章</th>	
-					</tr>
-				</table>
+			<div class="ui divider"></div>
+					 <div class="ui secondary pointing menu">
+						 <a class="item active" data-tab="posts">
+							 尚未發佈
+						 </a>
+						 <a class="item" data-tab="posted">
+							 已經發佈
+						 </a>
+					 </div>
+					<div class="ui tab active" data-tab="posts">
+					 	 <table id="marktitle" class="ui definition celled right aligned table">
+							 <thead>
+							 <tr>
+		 						 <th>佇列</th>
+		 						 <th>檔案名稱</th>		
+								 <th>刪除文章</th>	
+							 </tr>
+							 </thead>
+							 <tbody>
+							 </tbody>
+				 			 </table>
+					</div>
+					<div class="ui tab" data-tab="posted">
+						<table id="markedtitle" class="ui definition celled right aligned table">
+							<thead>
+								<tr>
+									<th>佇列</th>
+									<th>檔案名稱</th>	
+									<th>刪除文章</th>	
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
 			</div>
-			<div id="posted" class="tab-pane fade">	
-				<table id="markedtitle" class="table">
-					<tr>
-						<th>佇列</th>
-						<th>檔案名稱</th>	
-						<th>刪除文章</th>	
-					</tr>
-				</table>
-			</div>
-		</div>
-
+			</br>

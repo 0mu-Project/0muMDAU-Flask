@@ -1,10 +1,15 @@
-{% extends "base.html"%}
+{% extends "nbase.html"%}
 {% block title %}Admin Panel{% endblock %}
 {% block top %}{% include "topbar.html" %}{% endblock %}
 {% block content %}
 			{% include "edit.html" %}
 {% endblock %}
 {% block script %}
+<script>
+$('.menu .item')
+  .tab()
+  ;
+</script>
 <script>	
 	function showmdposted(url) {
 		$.ajax({
