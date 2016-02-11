@@ -4,6 +4,7 @@
 import sqlite3
 import setting as sets
 
+# initialize Database (create table)
 class InitDB:
     def createTable():
         try:
@@ -16,6 +17,7 @@ class InitDB:
             conn.close
             return False
 
+# User Login related function
 class LoginSQL:
     def getPass(user):
         try:
@@ -29,6 +31,7 @@ class LoginSQL:
             password = False
         return password
 
+# counting how many user or admin in database
 class countUSER:
     def countAdmin():
         try:
@@ -53,7 +56,7 @@ class countUSER:
             usercount = False 
         return usercount
 
-
+# Managment using function
 class ManageSQL:
     def addUser(user, password, admin, first):
         try:
