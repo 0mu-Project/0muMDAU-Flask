@@ -1,18 +1,17 @@
-</br>
-<img style="display:block; margin:auto;" src="/static/img/maintenance.jpg" width="97.5%" height"50%"></img>
-	<div class="panel-body">
-		<div class = "btn-group">
-			<a href="/shutdown" class="btn btn-danger">關閉伺服器</a>
+<div>
+<img style="display:block; margin:auto;" src="/static/img/maintenance.jpg" width="100%" height"50%"></img>
+		<div class="ui divider"></div>
+		<div class="ui red button"><a style="color:white;" href="/shutdown">關閉伺服器</a>
 		</div>
-		<div class = "btn-group">
-			<a href="/update"   class="btn btn-success">重新啟動</a>
+		<div class="ui orange button">	
+			<a style="color:white;" href="/update">重新啟動</a>
 		</div>
-		<div class = "btn-group">
-			<a href="/panel/rmlog"   class="btn btn-success">刪除log</a>
+		<div class="ui green button">	
+			<a style="color:white;" href="/panel/rmlog">刪除log</a>
 		</div>
-		<hr>
+		<div class="ui divider"></div>
 		<div id = "slog">
 			<h3>伺服器紀錄每30秒會自動整理一次</h3>
 			<iframe width="100%" height="420" src="/panel/server" frameBorder="0"></iframe>	
 		</div>
-	</div>
+</div>
