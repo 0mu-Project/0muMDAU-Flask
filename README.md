@@ -3,7 +3,7 @@
 ####How to
 -------------
 Short-Name : 0muMDAU-Flask  
-Front-End : Bootstrap/Html5/jQuery  
+Front-End : Semantic UI/Html5/jQuery  
 Back-End  : pypy3 or python3/Flask/SQLite3/Git/ShellScript  
 Editor of Front-End : simplemde-markdown-editor（[link](https://github.com/NextStepWebs/simplemde-markdown-editor))  
  
