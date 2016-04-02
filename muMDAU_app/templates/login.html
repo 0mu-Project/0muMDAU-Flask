@@ -1,24 +1,25 @@
 {% extends "nbase.html" %}
 {% block title %}Login Panel{% endblock%}
 {% block content %}
-		<img style="display:block; margin:auto;" src="/static/img/bg.jpg"></img>
+		<img style="display:block; margin:auto;" src="/static/img/bg.jpg">
 		<form id="bck" class="createtable" method="post" action="/login">
-			</br>
+			<br>
 			<div class="ui right labeled fluid input">
 				<input class="form-control" type="text" name="buser" size="20" placeholder="請輸入使用者名稱而非信箱"><br>
 				<a class="ui tag label" id="basic-addon3">後台帳號</a>
-			</div></br>
+			</div><br>
 			<div class="ui right labeled fluid input">
 				<input class="form-control" type="password" name="bpass" size="20" placeholder="請輸入您Github的密碼"><br>
 				<a class="ui tag label" id="basic-addon3">後台密碼</a>
-			</div></br>
+			</div><br>
 			<div class="ui right floated  buttons">
 		  		<button class="ui button">Support</button>
 				<div class="or"></div>
 			  	<button id="login" type="submit" class="ui positive button">登入系統</button>
 			</div>  
+			<br>
 		</form>		
-		</br>
-		</hr>
+		<br>
+		
 {% endblock%}
 {% block script %}{% endblock %}
